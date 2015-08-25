@@ -1,4 +1,5 @@
-# pantherdoc-meme
+# PantherDoc Meme 
 
-Still trying to figure this out. Bear with me.
+Cloned from "Meme" by Vox Media, available here: [https://github.com/voxmedia/meme](https://github.com/voxmedia/meme)
 
+Contributors: Anthony Santagati III.
