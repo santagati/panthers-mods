@@ -1,0 +1,57 @@
+var MEME_SETTINGS = {
+  creditText: '#PanthersTaughtMe', // Default "credits" text.
+  creditSize: 24, // Font size for credit text.
+  downloadName: 'share', // The name of the downloaded image file (will have a ".png" extension added).
+  fontColor: '#fbcb83', // Universal font color.
+
+  // Universal font family for texts:
+  // Note that you'll need to included quoted font names as you would in CSS, ie: '"Knockout 28 B"'.
+  fontFamily: 'Le Havre Rough',
+  // Font family options: set to empty array to disable font selector.
+  // These options may also be formatted as {text:'Knockout', value:'"Knockout 28 B"'}.
+  fontFamilyOpts: [],
+  
+  // Font size of main headline:
+  fontSize: 36,
+  // Font size options: set to empty array to disable font-size selector.
+  fontSizeOpts: [
+  	{text: 'Small', value: 36},
+    {text: 'Large', value: 58}
+	],
+  lineHeight: 0.5,
+  headlineText: 'ALL POWER TO THE PEOPLE', // Default headline text.
+  height: 755, // Canvas rendering height.
+  imageScale: 1, // Background image scale.
+  imageSrc: '', // Default background image path. MUST reside on host domain, or use base64 data.
+  overlayAlpha: 0.6, // Opacity of image overlay.
+
+  // Image overlay color, or blank ('') for no overlay:
+  overlayColor: '#000',
+  // Overlay color options: set to empty array to disable overlay options selector.
+  overlayColorOpts: ['#000'],
+  paddingRatio: 0.05, // Percentage of canvas width to use as edge padding.
+  
+  // Text alignment: valid settings are "left", "center", and "right".
+  textAlign: 'left',
+  // Text alignment options: set to empty array to disable alignment picker.
+  textAlignOpts: [
+    {text: 'Top Left', value: 'left'}, 
+    {text: 'Center', value: 'center'}
+  ],
+
+  textShadow: false, // Text shadow toggle.
+  textShadowEdit: false, // Toggles text shadow control within the editor.
+  watermarkAlpha: 1, // Opacity of watermark image.
+  watermarkMaxWidthRatio: 0.25, // Maximum allowed width of watermark (percentage of total canvas width).
+
+  // Path to the watermark image source, or blank for no watermark:
+  // Alternatively, use '<%= asset_data_uri("bpp_title.png") %>' to populate the watermark with base64 data, avoiding Cross-Origin issues.
+  watermarkSrc: (localStorage && localStorage.getItem('meme_watermark')) || '<%= image_path("bpp_title.png") %>',
+  
+  // Watermark image options: set to empty array to disable watermark picker.
+  // NOTE: only populate the "data" attributes with base64 data when concerned about Cross-Origin requests...
+  // Otherwise, just leave "data" attributes blank and allow images to load from your server.
+  watermarkOpts: [],
+
+  width: 755 // Canvas rendering width.
+};
