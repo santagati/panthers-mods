@@ -16,13 +16,25 @@ MEME.MemeEditorView = Backbone.View.extend({
 
     function buildOptions(opts) {
       return _.reduce(opts, function(memo, opt) {
-        return memo += ['<option value="', opt.hasOwnProperty('value') ? opt.value : opt, '">', opt.hasOwnProperty('text') ? opt.text : opt, '</option>'].join('');
+        return memo += ['<option value="',
+                         opt.hasOwnProperty('value') ? opt.value : opt,
+                         '"',
+                         opt.hasOwnProperty('selected') ? 'selected="selected"' : '',
+                         opt.hasOwnProperty('disabled') ? 'disabled="disabled"' : '',
+                         '>',
+                         opt.hasOwnProperty('text') ? opt.text : opt,
+                         '</option>'].join('');
       }, '');
     }
 
     if (d.textShadowEdit) {
       $('#text-shadow').parent().show();
     }
+    
+    // Build aspect ratio options:
+    if (d.aspectRatioOpts && d.aspectRatioOpts.length) {
+      $('#aspect-ratio').append(buildOptions(d.aspectRatioOpts)).show();
+    }    
 
     // Build text alignment options:
     if (d.textAlignOpts && d.textAlignOpts.length) {
@@ -34,17 +46,13 @@ MEME.MemeEditorView = Backbone.View.extend({
       $('#font-size').append(buildOptions(d.fontSizeOpts)).show();
     }
 
-    // Build font family options:
-    if (d.fontFamilyOpts && d.fontFamilyOpts.length) {
-      $('#font-family').append(buildOptions(d.fontFamilyOpts)).show();
-    }
 
     // Build watermark options:
     if (d.watermarkOpts && d.watermarkOpts.length) {
       $('#watermark').append(buildOptions(d.watermarkOpts)).show();
     }
-
-    // Build overlay color options:
+    
+	// Build overlay color options:
     if (d.overlayColorOpts && d.overlayColorOpts.length) {
       var overlayOpts = _.reduce(d.overlayColorOpts, function(memo, opt) {
         var color = opt.hasOwnProperty('value') ? opt.value : opt;
@@ -53,23 +61,44 @@ MEME.MemeEditorView = Backbone.View.extend({
 
       $('#overlay').show().find('ul').append(overlayOpts);
     }
+   
+   
+   //this.onAspectRatio();
   },
 
   render: function() {
     var d = this.model.toJSON();
-    this.$('#headline').val(d.headlineText);
-    this.$('#credit').val(d.creditText);
-    this.$('#watermark').val(d.watermarkSrc);
+    
+    //Image
     this.$('#image-scale').val(d.imageScale);
+    this.$('#aspect-ratio').val(d.aspectRatio);
+    this.$('#overlay').val(d.overlayColor);
+    
+    //Text
+    this.$('#headline').val(d.headlineText);
+    this.$('#bio').val(d.bioText);
+    this.$('#credit').val(d.creditText);
     this.$('#font-size').val(d.fontSize);
-    this.$('#font-family').val(d.fontFamily);
     this.$('#text-align').val(d.textAlign);
+    this.$('#font-family').val(d.fontFamily);
     this.$('#text-shadow').prop('checked', d.textShadow);
+    
+    //Extra
+    this.$('#watermark').val(d.watermarkSrc);
     this.$('#overlay').find('[value="'+d.overlayColor+'"]').prop('checked', true);
+    
+    /*
+    if (this.model.hasBackground()){
+      $('#meme-download').removeClass('disabled')
+    }
+    */
   },
+  
 
   events: {
     'input #headline': 'onHeadline',
+    'keydown #headline':'onKeyAction',
+	'input #bio': 'onBio',
     'input #credit': 'onCredit',
     'input #image-scale': 'onScale',
     'change #font-size': 'onFontSize',
@@ -78,20 +107,62 @@ MEME.MemeEditorView = Backbone.View.extend({
     'change #text-align': 'onTextAlign',
     'change #text-shadow': 'onTextShadow',
     'change [name="overlay"]': 'onOverlayColor',
+    
     'dragover #dropzone': 'onZoneOver',
-    'dragleave #dropzone': 'onZoneOut',
-    'drop #dropzone': 'onZoneDrop'
+    'drop #dropzone': 'onZoneDrop',
+    'dragover canvas': 'onZoneOver',
+    'drop canvas': 'onZoneDrop',
+        
+    'change #aspect-ratio': 'onAspectRatio',
+    'change #background': 'onBackground',
+    'change #image-upload': 'onFileSelect',
+    'click #meme-download': 'onDownload',
+    
+
+    
   },
 
   onCredit: function() {
     this.model.set('creditText', this.$('#credit').val());
+  },
+  
+  onBio: function() {
+    this.model.set('bioText', this.$('#bio').val());
+  },
+  
+  onKeyAction: function(e) {
+    var code = e.keyCode || e.which;
+    if (code == 13) {
+      return false;
+    }
+  },
+  
+  onDownload: function(e){
+    /*
+    if (e.currentTarget.className == 'disabled'){
+      return;
+    }
+    */
+    var anchor = document.createElement('a');
+    anchor.href = this.model.canvas.toDataURL("image/jpeg", .80);
+    anchor.target = '_blank';
+    anchor.download = this.model.attributes.downloadName + '.jpg';
+
+    document.body.appendChild(anchor);
+    anchor.click();
+    document.body.removeChild(anchor);    
   },
 
   onHeadline: function() {
     this.model.set('headlineText', this.$('#headline').val());
   },
 
-  onTextAlign: function() {
+  onFileSelect: function(t) {
+        var e = t.target;
+        e && this.model.loadBackground(e.files[0]);
+  },
+  
+  onTextAlign: function() {    
     this.model.set('textAlign', this.$('#text-align').val());
   },
 
@@ -111,9 +182,22 @@ MEME.MemeEditorView = Backbone.View.extend({
     this.model.set('watermarkSrc', this.$('#watermark').val());
     if (localStorage) localStorage.setItem('meme_watermark', this.$('#watermark').val());
   },
+  
+  onAspectRatio: function() {
+    var wh = this.$('#aspect-ratio').val().split('x');
+    
+    this.model.set({
+      aspectRatio: this.$('#aspect-ratio').val(),
+      width:wh[0],
+      height:wh[1]
+    });
+    
+    this.$('#meme-canvas').attr('class', 'ratio-' + this.$('#aspect-ratio').find(':selected').text().split(' ')[0].toLowerCase());
+  },
 
   onScale: function() {
-    this.model.set('imageScale', this.$('#image-scale').val());
+    this.model.set({imageScale: this.$('#image-scale').val()});
+    //this.model.set('imageScale', this.$('#image-scale').val());
   },
 
   onOverlayColor: function(evt) {

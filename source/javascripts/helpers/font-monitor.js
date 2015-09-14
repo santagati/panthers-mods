@@ -26,8 +26,7 @@ MEME.waitForFonts = function(callback) {
     el.style.fontVariant = 'normal';
     el.style.fontStyle = 'normal';
     el.style.fontWeight = 'normal';
-    el.style.letterSpacing = '-1';
-	el.style.lineHeight = '0.5';
+    el.style.letterSpacing = '0';
     document.body.appendChild(el);
 
     this.el = el;

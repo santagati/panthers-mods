@@ -1,0 +1,53 @@
+:ruby
+  overlay = ['#000']
+  
+%form#meme-editor-view
+  
+  %fieldset.upload-image
+    .upload-wrapper.clearfix
+      .form-input#explore.explore
+        %label.icon-arrow-up{:for => "image"} Upload Image
+        %input#image-upload.image-upload{:name => "image", :type => "file", :accept=>"image/*"}
+      
+    #meme-canvas-view
+      #meme-canvas.ratio-tn
+        %noscript Sorry, this tool requires a canvas-enabled browser. Try Google Chrome.
+  
+  .options.clearfix
+    %fieldset
+	
+	  .form-input
+        %label.form-title{:for => "headline"} Username
+        %textarea#headline{:name => "headline"}
+
+      .form-input
+        %label.form-title{:for => "bio"} Details
+        %input#bio.text{:name => "bio", :type=>"text"}
+
+      .form-input
+        %label.form-title{:for => "image-scale"} Resize Image
+        %input#image-scale{:max => "4", :min => ".01", :step => ".01", :type => "range", :value => "1"}
+		
+      .form-input
+        %label.form-title{:for => "text-align"} Text Align
+        %select#text-align
+
+      .form-input
+        %label.form-title{:for => "font-size"} Font Size
+        %select#font-size
+
+      .items-group.form-input
+        .form-title Overlay
+        %ul#overlay.clearfix
+          %li
+            %input#overlay-none{:name => "overlay", :type => "radio", :value => "", :checked=>"checked"}
+            %label.items-group-none{:for=>'overlay-none'} None
+          - overlay.each_with_index do |element, index|
+            %li
+              %input{:id=>"overlay-#{index}", :name => "overlay", :type => "radio", :value =>element}
+              %label{:for=>"overlay-#{index}", :style=>"background: #{element}"}= element
+			  
+
+          
+          
+  #meme-download.disabled{:title=>"Download Image"} Download Image          

@@ -1,0 +1,566 @@
+@import 'mixin';
+
+body {
+  overflow-x: hidden;
+}
+
+h1.header-title {
+	font-family: 'Le Havre Rough' !important;
+	font-size: 3em !important;
+	font-weight: normal;
+	letter-spacing: -1;
+	line-height: normal;
+	color: #EADECD !important;
+	text-align: center;
+	text-shadow: 2px 2px 3px #000;
+	margin: 0 auto !important;
+	width: 100%;
+	max-width: 755px;
+	padding-bottom: 20px;
+	display: block;
+	position: relative;
+}
+
+h3.header-subtitle {
+	font-family: 'Le Havre Rough' !important;
+	font-size: 1.2em !important;
+	font-weight: normal;
+	letter-spacing: -1;
+	line-height: normal !important;
+	color: #EADECD !important;
+	text-align: center;
+	margin: 0 auto !important;
+	width: 100%;
+	max-width: 755px;
+	padding-bottom: 20px;
+	display: block;
+	position: relative;
+}
+
+h3.header-subtitle a {
+	color: #C99342;
+}
+
+h3.header-subtitle a:hover {
+	color: #7ECA97;
+}
+
+canvas {
+  display: block;
+  background: none;
+  border: 1px solid rgba(234,222,205,0.5);
+  position: absolute;
+  width: 100% !important;
+  height: 100% !important;
+  left: 0;
+  top: 0;
+  
+}
+
+.form-input {
+  input:focus,
+  textarea:focus {
+    -webkit-user-modify: read-write-plaintext-only;
+  }
+}
+
+  /*------- Slider Styles --------*/
+  
+
+input[type=range] {
+  -webkit-appearance: none;
+  margin: 18px 0;
+  width: 100%;
+}
+input[type=range]:focus {
+  outline: none;
+}
+input[type=range]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 3px;
+  cursor: pointer;
+  animate: 0.2s;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  background: rgba(147,121,88,0.7);
+  border-radius: 2px;
+  border: 0.2px solid #010101;
+}
+input[type=range]::-webkit-slider-thumb {
+  box-shadow: 0px 0px 3px #000000;
+  border: 1px solid #937958;
+  height: 12px;
+  width: 12px;
+  border-radius: 8px;
+  background: #EADECD;
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin-top: -5px;
+}
+input[type=range]:focus::-webkit-slider-runnable-track {
+  background: #367ebd;
+}
+input[type=range]::-moz-range-track {
+  width: 100%;
+  height: 3px;
+  cursor: pointer;
+  animate: 0.2s;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  background: rgba(147,121,88,0.7);
+  border-radius: 1.3px;
+  border: 0.2px solid #010101;
+}
+input[type=range]::-moz-range-thumb {
+  box-shadow: 0px 0px 3px #000000;
+  border: 1px solid #937958;
+  height: 12px;
+  width: 12px;
+  border-radius: 8px;
+  background: #EADECD;
+  cursor: pointer;
+}
+input[type=range]::-ms-track {
+  width: 100%;
+  height: 3px;
+  cursor: pointer;
+  animate: 0.2s;
+  background: transparent;
+  border-color: transparent;
+  border-width: 16px 0;
+  color: transparent;
+}
+input[type=range]::-ms-fill-lower {
+  background: #2a6495;
+  border: 0.2px solid #010101;
+  border-radius: 2.6px;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+}
+input[type=range]::-ms-fill-upper {
+  background: #3071a9;
+  border: 0.2px solid #010101;
+  border-radius: 2.6px;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+}
+input[type=range]::-ms-thumb {
+  box-shadow: 0px 0px 3px #000000;
+  border: 1px solid #937958;
+  height: 12px;
+  width: 12px;
+  border-radius: 8px;
+  background: #EADECD;
+  cursor: pointer;
+}
+input[type=range]:focus::-ms-fill-lower {
+  background: #3071a9;
+}
+input[type=range]:focus::-ms-fill-upper {
+  background: #367ebd;
+}
+
+  /*------- End Slider Styles --------*/
+
+
+.is-touch {
+  #dropzone {
+    display:none;
+    visibility: hidden;
+  }
+  
+  .upload-image {
+    .form-input {
+      width: 100%;
+    }
+    
+    .explore {
+      @include border_radius((5rem/16));
+    }
+  }
+}
+
+.upload-image {
+  .upload-wrapper {
+    margin-bottom: (36rem/16);
+  }
+
+  .form-input {
+    width: 100%;
+    text-transform: uppercase;
+    font-size: (18rem/16);
+    color: #EADECD;
+	font-family: 'Le Havre Rough', sans-serif;
+	letter-spacing: -1px;
+  	text-transform: uppercase;
+	background: #4B252B;
+    line-height: (65rem/16);
+    position: relative;
+    text-align: center;
+    @include box_sizing(border-box);
+  }
+
+  label {
+    height: 100%;
+    display: table;
+    margin: 0 auto;
+  }
+
+  .image-upload {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+  }
+
+  .drop {
+    border: 1px dashed #EADECD;
+    border-right: none;
+    position: relative;
+	
+    
+    @include border_radius(5px 0 0 5px);
+
+    &:before{
+      content: "";
+      position: relative;
+      width: 38px;
+      height: 31px;
+      /* background: $sprite -125px 0; */
+      top:(8rem/16);
+      left: (-4rem/16);
+      display: inline-block;
+    }
+
+  }
+  .explore {
+    border: 1px solid #EADECD;
+    @include border_radius((7rem/16) (7rem/16) (7rem/16) (7rem/16));
+	margin: 0 auto;
+	max-width: 755px;
+
+    .icon-arrow-up{
+      display: block;
+      width: 100%;
+      height: 100%;
+      
+      &:before{
+        content: "";
+        position: relative;
+        width: 41px;
+        height: 31px;
+        background: url(../images/bpp_upload.png) no-repeat center center;
+        top:(8rem/16);
+        left: (-8rem/16);
+        display: inline-block;
+      }      
+      
+    }
+  }
+
+}
+
+#meme-canvas-view {
+  background: none;
+  position: relative;
+  
+  
+  &:before {
+    background: none repeat scroll 0 0;
+    content: "";
+    height: 100%;
+    left: 100%;
+    position: absolute;
+    top: 0;
+    width: 100%;
+  }
+  &:after {
+    background: none repeat scroll 0 0;
+    content: "";
+    height: 100%;
+    right: 100%;
+    position: absolute;
+    top: 0;
+    width: 100%;
+  }
+  
+}
+
+#meme-canvas {
+  position: relative;
+  width: 755;
+  height: 755;
+  margin: 0 auto;
+  border: 1px solid rgba(234,222,205,0.5);
+  @include transition(all .25s linear);
+  
+  &.ratio-tn {
+    width: (755rem/16);
+    padding-bottom: (755rem/16);
+  }
+  &.ratio-instagram {
+    width: (510rem/16);
+    padding-bottom: (510rem/16);
+  }
+  &.ratio-twitter {
+    width: (506rem/16);
+    padding-bottom: (253rem/16);
+  }
+  
+}
+
+.options {
+  margin-top: (20rem/16);
+
+  fieldset {
+    width: (750rem/16);
+    height: (355rem/16);
+	text-align: center;
+    @include border_radius(10px);
+    position: relative;
+    padding: (10rem/16);
+    margin: 0 auto !important;
+    box-sizing: border-box;
+
+    /* &:first-child {
+      margin-left:0;
+    } */
+  }
+
+  h2 {
+    text-transform: uppercase;
+    color: #EADECD;
+    text-align: center;
+    position: relative;
+    font-weight: 300;
+    margin-bottom: (10rem/16);
+
+    &:before {
+      background:#808080;
+      bottom: 0;
+      content: "";
+      height: 1px;
+      left: 1%;
+      position: absolute;
+      width: 98%;
+    }
+  }
+
+  .form-title{
+  	font-family: 'Le Havre Rough', sans-serif;
+	letter-spacing: -1px;
+    text-transform: uppercase;
+	text-align: center;
+    font-size: (18rem/16);
+    color: #EADECD;
+    display: block;
+  }
+  /*
+  .two-columns {
+    margin-top: (10rem/16);
+    
+    .form-input{
+      margin-top:0;
+    }
+  }
+  */
+  .form-input{
+    margin-top: (10rem/16);
+
+    input[type='range'],
+    input.text,
+    select,
+    textarea{
+      width: 100%;
+      border: none;
+      resize: none;
+      @include box_sizing(border-box);
+    }
+
+    input.text,
+    select,
+    textarea{
+      border: none;
+      background: #ffffff;
+      font-size: (14rem/16);
+      padding: (10rem/16);
+      @include border_radius(5px);
+	  text-align: center;
+    }
+
+    input.text,
+    select{
+      padding: 0 (10rem/16);
+      height: (40rem/16);
+      line-height: (40rem/16);
+    }
+  }
+     
+  .items-group{
+    li {
+	  float: none;
+      width: (32rem/16);
+      height: (32rem/16);
+	  display:inline-block;
+	  border: 1px solid rgba(234,222,205,0.5);
+      position: relative;
+      cursor: pointer;
+      margin-top: (10rem/16);
+      margin-left: 10px;
+	  margin-right: 10px;
+      
+      &:nth-child(-n+6){
+        margin-top:0;
+      }
+      &:nth-child(6n+1) {
+        margin-left: 0;
+      }
+    }
+    label {
+      width: 100%;
+      height: 100%;
+      text-indent: -999em;
+      overflow: hidden;
+      display: block;
+      position: relative;
+      cursor: pointer;
+      
+      &:before{
+        position: absolute;
+        width: 100%;
+        height: 100%; 
+        border:solid (1rem/16) white;
+        left: 0;
+        top: 0;
+        content:"";
+        box-sizing: border-box;
+        z-index: 9;
+        
+        display:none;
+        visibility: hidden;
+      }
+    }
+    input {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      z-index: 2;
+      top:0;
+      left: 0;
+      cursor: pointer;
+      
+      &:checked ~ label:before {
+        display:block;
+        visibility: visible;     
+        border-color:white !important;   
+      }
+    } 
+    
+    .items-group-none:before {
+      content:"X";
+      color:#999;
+      line-height: (32rem/16);
+      text-align: center;
+      border-color:#999 !important;
+      text-indent: 0;
+      display:block;
+      visibility: visible;             
+    }
+    
+  }
+
+  .two-columns{
+  
+    .form-input{
+      width: 100%;
+    }
+  }
+
+  .checkbox-item{
+    position: relative;
+    height: (30rem/16);
+    cursor: pointer;
+
+    label{
+      display:block;
+      margin-left: (35rem/16);
+      height: (30rem/16);
+      line-height: (30rem/16);
+      cursor: pointer;
+      
+      &:after,
+      &:before  {
+	      content: "";
+	      position: absolute;
+      }
+      
+      &:before{
+        width: (30rem/16);
+        height: (30rem/16);
+        background: #ffffff;
+        top: 0;
+        left: 0;
+        @include border_radius(5px);
+      }
+      
+      &:after {
+        $h:10px;
+        width: 12px;
+        height: $h;
+        top:50%;
+        left:(9rem/16);
+        margin-top: ($h/-2);
+        
+        @include hide();
+      }
+    }
+
+
+    input{
+      
+      width: (30rem/16);
+      height: (30rem/16);
+      left: 0;
+      position: absolute;
+      top: 0;
+      z-index: 2;
+      opacity: 0;
+      cursor: pointer;
+
+      &:checked ~ label:after {
+        display:block;
+        visibility: visible;
+      }
+    }
+
+
+
+
+
+  }
+}
+
+#meme-download{
+  background: #7ECA97;
+  @include border_radius(10px);
+  color: #ffffff;
+  font-family: 'Le Havre Rough', sans-serif;
+  text-transform: uppercase;
+  font-size: (24rem/16);
+  text-align: center;
+  margin: 0 auto 20px auto;
+  margin-top: (20rem/16);
+  line-height: (70rem/16);
+  max-width: 755px;
+  cursor: pointer;
+  
+  &:before{
+    content: "";
+    position: relative;
+    width: 21px;
+    height: 31px;
+    top:(8rem/16);
+    left: (-8rem/16);
+    display: inline-block;
+  }  
+}
+

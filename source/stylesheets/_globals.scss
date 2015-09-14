@@ -1,21 +1,13 @@
 // global declarations
+/*
 * {
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
 
-
 body {
-  background: #000 url(../images/bpp_bg.jpg) no-repeat center center;
-  -webkit-background-size: 100%; 
-    	-moz-background-size: 100%; 
-    	-o-background-size: 100%; 
-    	background-size: 100%; 
-	-webkit-background-size: cover; 
-	-moz-background-size: cover; 
-	-o-background-size: cover; 
-	background-size: cover;
-  color: #EADECD;
+  background: #FFF;
+  color: #000;
   display: table;
   font-family: Arial, Helvetica, sans-serif;
   font-size: percentage($default-font-size/16px);
@@ -36,36 +28,40 @@ body.noselect {
   margin: 0 auto;
 }
 
-h1 {
+header-title {
 	font-family: 'Le Havre Rough';
 	font-size: 3em;
+	font-weight: normal;
 	letter-spacing: -1;
 	line-height: normal;
-	color: #EADECD;
+	color: #000;
 	text-align: center;
 	text-shadow: 2px 2px 3px #000;
+	margin: 0 auto;
 }
 
-h2 {
+.form-title {
 	font-family: 'Le Havre Rough';
-	letter-spacing: -1;
 	font-size: 1.2em !important;
+	font-weight: normal;
+	letter-spacing: -1;
 	padding-top: 20px;
 }
 
 h3 {
 	font-family: 'Le Havre Rough';
+	font-weight: normal;
 	letter-spacing: -1;
 	line-height: normal;
 	padding-bottom: 20px;
 }
 
 h3 a {
-	color: #C99342;
+	color: #C00;
 }
 
 h3 a:hover {
-	color: #7ECA97;
+	color: #222;
 }
 
 .left { float: left; }
@@ -73,8 +69,8 @@ h3 a:hover {
 
 .cf:before,
 .cf:after {
-    content: " "; /* 1 */
-    display: table; /* 2 */
+    content: " ";
+    display: table;
 }
 .cf:after {
     clear: both;
@@ -82,3 +78,4 @@ h3 a:hover {
 .cf {
     *zoom: 1;
 }
+*/
